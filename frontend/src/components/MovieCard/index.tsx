@@ -1,31 +1,32 @@
 import MovieScore from "components/MovieScore";
 import { Link } from "react-router-dom";
+import { Movie } from "types/movie";
 
-function MovieCard() {
+type Props = {
+	movie: Movie;
+};
 
-    const movie = {
-        id: 1,
-        image: "https://http2.mlstatic.com/D_NQ_NP_892561-MLB29141075401_012019-O.jpg",
-        title: "Castle",
-        count: 2,
-        score: 4.5
-    };
+const MovieCard = ({ movie }: Props) => {
+	return (
+		<div>
+			<img
+				className="dsmovie-movie-card-image"
+				src={movie.image}
+				alt={movie.title}
+			/>
 
-    return (
+			<div className="dsmovie-card-bottom-container">
+				<h3>{movie.title}</h3>
 
+				<MovieScore count={movie.count} score={movie.score} />
 
-        <div>
-            <img className="dsmovie-movie-card-image" src={movie.image} alt={movie.title} />
-            <div className="dsmovie-card-bottom-container">
-                <h3>{movie.title}</h3>
-                <MovieScore />
-                <Link to={`/form/${movie.id}`}>
-                    <div className="btn btn-primary dsmovie-btn">Avaliar</div>
-                </Link>
-            </div>
-        </div >
-
-    );
-}
+				<Link to={`/form/${movie.id}`}>
+					<div className="btn btn-primary dsmovie-btn">Avaliar</div>
+				</Link>
+			</div>
+		</div>
+	);
+};
 
 export default MovieCard;
+
